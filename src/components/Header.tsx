@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { siteConfig } from '../config/siteConfig';
-import { SunIcon, MoonIcon, PrinterIcon, ClockIcon } from './Icons';
+import { SunIcon, MoonIcon, PrinterIcon } from './Icons';
 
 interface HeaderProps {
   theme: 'dark' | 'light';
@@ -27,20 +27,26 @@ export const Header: React.FC<HeaderProps> = ({ theme, onToggleTheme }) => {
       {/* Top Banner Notice */}
       <div className="top-banner">
         <div className="section-container top-banner-inner">
-          <div className="banner-left">
+          <div className="banner-badge-wrapper">
             <span className="badge badge-retired">
               <span className="badge-pulse-dot" />
               Official Notice
             </span>
-            <span className="banner-text">
-              PrepVerse operations have officially concluded. This notice remains active until{' '}
+          </div>
+          <div className="banner-content-text">
+            <span className="banner-notice-line">
+              PrepVerse has officially ceased operations. This notice will remain available until{' '}
               <strong>{siteConfig.dates.formattedArchiveDate}</strong>.
             </span>
-          </div>
-          <div className="banner-right">
-            <span className="archive-pill">
-              <ClockIcon size={14} />
-              Active Archive Period
+            <span className="banner-contact-line">
+              For any questions, concerns, or complaints, please contact{' '}
+              <a
+                href={`mailto:${siteConfig.support.emailPlaceholder}`}
+                className="banner-contact-link"
+              >
+                {siteConfig.support.emailPlaceholder}
+              </a>
+              .
             </span>
           </div>
         </div>
@@ -115,43 +121,80 @@ export const Header: React.FC<HeaderProps> = ({ theme, onToggleTheme }) => {
         }
 
         .top-banner {
-          background: linear-gradient(90deg, rgba(76, 29, 149, 0.45) 0%, rgba(30, 24, 54, 0.85) 100%);
+          background: linear-gradient(90deg, rgba(76, 29, 149, 0.5) 0%, rgba(30, 24, 54, 0.9) 100%);
           border-bottom: 1px solid var(--border-subtle);
-          padding: 0.5rem 0;
-          font-size: 0.825rem;
+          padding: 0.65rem 0;
+          font-size: 0.85rem;
           color: var(--text-secondary);
+          line-height: 1.45;
+        }
+
+        [data-theme='light'] .top-banner {
+          background: linear-gradient(90deg, rgba(237, 233, 254, 0.85) 0%, rgba(245, 243, 255, 0.95) 100%);
+          border-bottom: 1px solid rgba(109, 40, 217, 0.18);
         }
 
         .top-banner-inner {
           display: flex;
           align-items: center;
-          justify-content: space-between;
+          justify-content: center;
           gap: 1rem;
-          flex-wrap: wrap;
+          text-align: center;
         }
 
-        .banner-left {
+        .banner-badge-wrapper {
+          flex-shrink: 0;
+          display: inline-flex;
+          align-items: center;
+        }
+
+        .banner-content-text {
           display: flex;
           align-items: center;
-          gap: 0.75rem;
+          justify-content: center;
           flex-wrap: wrap;
+          gap: 0.35rem 0.65rem;
         }
 
-        .banner-text strong {
+        .banner-notice-line {
           color: var(--text-primary);
         }
 
-        .archive-pill {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.35rem;
-          font-size: 0.775rem;
-          font-weight: 500;
+        .banner-notice-line strong {
+          color: var(--pv-purple-300);
+          font-weight: 600;
+        }
+
+        [data-theme='light'] .banner-notice-line strong {
+          color: var(--pv-purple-800);
+        }
+
+        .banner-contact-line {
+          color: var(--text-secondary);
+        }
+
+        .banner-contact-link {
           color: var(--pv-amber-400);
-          background: rgba(245, 158, 11, 0.1);
-          padding: 0.2rem 0.6rem;
-          border-radius: var(--radius-full);
-          border: 1px solid rgba(245, 158, 11, 0.25);
+          text-decoration: underline;
+          text-underline-offset: 3px;
+          font-weight: 600;
+          transition: color var(--transition-fast), background-color var(--transition-fast);
+          padding: 0.1rem 0.3rem;
+          border-radius: var(--radius-sm);
+        }
+
+        [data-theme='light'] .banner-contact-link {
+          color: var(--pv-amber-600);
+        }
+
+        .banner-contact-link:hover {
+          color: #ffffff;
+          background: rgba(245, 158, 11, 0.25);
+        }
+
+        [data-theme='light'] .banner-contact-link:hover {
+          color: var(--pv-amber-700);
+          background: rgba(245, 158, 11, 0.15);
         }
 
         .main-nav {
@@ -232,6 +275,20 @@ export const Header: React.FC<HeaderProps> = ({ theme, onToggleTheme }) => {
           background: var(--bg-surface-hover);
           color: var(--text-primary);
           border-color: var(--border-highlight);
+        }
+
+        @media (max-width: 860px) {
+          .top-banner-inner {
+            flex-direction: column;
+            gap: 0.45rem;
+            padding-top: 0.25rem;
+            padding-bottom: 0.25rem;
+          }
+
+          .banner-content-text {
+            flex-direction: column;
+            gap: 0.25rem;
+          }
         }
 
         @media (max-width: 820px) {

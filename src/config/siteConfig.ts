@@ -65,7 +65,7 @@ export const siteConfig: SiteConfig = {
   dates: {
     effectiveDate: 'October 2026',
     noticeArchiveDate: '2026-10-21',
-    formattedArchiveDate: '21st October 2026',
+    formattedArchiveDate: '21 October 2026',
   },
   support: {
     emailPlaceholder: 'madhu@hyrecruitai.com',
@@ -155,7 +155,7 @@ export const siteConfig: SiteConfig = {
       category: 'general',
       question: 'How long will this closure notice and support desk remain available?',
       answer:
-        'This official static closure portal and the dedicated transition support channel will remain fully accessible online through 21st October 2026.',
+        'This official static closure portal and the dedicated transition support channel will remain fully accessible online through 21 October 2026.',
     },
   ],
 };
